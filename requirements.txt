@@ -1,0 +1,6 @@
+Flask==3.0.2
+numpy==1.26.4
+dlib==19.24.2
+imutils==0.5.4
+pygame==2.5.2
+
