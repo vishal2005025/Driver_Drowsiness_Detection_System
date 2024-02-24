@@ -17,6 +17,11 @@ The Sleep Safe Driver Drowsiness Detection System is a software-based solution a
 The Sleep Safe Driver Drowsiness Detection System operates by analyzing facial features and monitoring the driver's behavior to identify signs of drowsiness. The system utilizes a combination of machine learning models and image processing techniques to track key indicators such as eye closure and yawning.
 When the system detects potential signs of drowsiness, it triggers alerts to notify the driver and prompt them to take necessary precautions. These alerts can include visual warnings displayed on a dashboard-mounted screen or auditory signals through speakers in the vehicle.
 
+## Figma Url
+
+https://www.figma.com/file/gFRHDTQq7BYsDiyzMqauvd/Untitled?type=design&node-id=0%3A1&mode=design&t=SWsIldLJsCtfxoe2-1
+
+
 ## Installation💥
 
 **1.** Clone the repository:
