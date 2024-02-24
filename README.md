@@ -53,6 +53,12 @@ python app.py
 - imutils
 - pygame
 
+## Contributors
+1.Vishal Malyan
+2.Deepak Verma
+3.Sushant Soni
+4.Vidhi Gupta
+
 ### Contributing📑
 We welcome contributions! If you have ideas for new features, improvements, or bug fixes, 
 please open an issue or submit a pull request. Check out our contribution guidelines for more information.
