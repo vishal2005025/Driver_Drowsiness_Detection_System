@@ -10,13 +10,14 @@ from pygame import mixer
 app = Flask(__name__)
 
 mixer.init()
-no_driver_sound = mixer.Sound('nodriver_audio.wav')
-sleep_sound = mixer.Sound('sleep_sound.wav')
-tired_sound = mixer.Sound('rest_audio.wav')
+no_driver_sound = mixer.Sound('static/nodriver_audio.wav')
+sleep_sound = mixer.Sound('static/sleep_sound.wav')
+tired_sound = mixer.Sound('static/rest_audio.wav')
+
 
 # Initializing the face detector and landmark detector
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+predictor = dlib.shape_predictor("models/shape_predictor_68_face_landmarks.dat")
 
 def compute(ptA, ptB):
     dist = np.linalg.norm(ptA - ptB)
