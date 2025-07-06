@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: driver-detection-app
+    runtime: python
+    buildCommand: ./build.sh && pip install -r requirements.txt
+    startCommand: python app.py
+    envVars:
+      - key: DISABLE_PYGAME_SOUND
+        value: true
