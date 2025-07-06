@@ -254,6 +254,71 @@
   <script src="/static/js/bootstrap.min.js"></script>
   <script src="/static/js/slick.js"></script>
   <script src="/static/js/templatemo-script.js"></script>
+  <script>
+  const video = document.getElementById("video");
+  const statusText = document.getElementById("status-text");
+  const canvas = document.createElement("canvas");
+
+  // Preload audio
+  const sleepSound = new Audio("/static/sleep_sound.wav");
+  const noDriverSound = new Audio("/static/nodriver_audio.wav");
+  const restSound = new Audio("/static/rest_audio.wav");
+
+  let audioUnlocked = false;
+
+  function unlockAudioContext() {
+    if (!audioUnlocked) {
+      [sleepSound, noDriverSound, restSound].forEach(sound => {
+        sound.play().then(() => sound.pause());
+      });
+      audioUnlocked = true;
+    }
+  }
+
+  document.body.addEventListener("click", unlockAudioContext, { once: true });
+
+  // Access webcam
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      video.srcObject = stream;
+    }).catch(err => {
+      console.error("Webcam error:", err);
+      statusText.innerText = "Webcam access denied.";
+    });
+
+  async function sendFrame() {
+    if (!video.videoWidth || !video.videoHeight) return;
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+    const base64 = canvas.toDataURL("image/jpeg");
+
+    try {
+      const res = await fetch("/api/detect", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64 })
+      });
+      const data = await res.json();
+      const status = data.status;
+      statusText.innerText = "Driver Status: " + status;
+
+      if (status === "Sleeping") {
+        sleepSound.play();
+      } else if (status === "No Driver") {
+        noDriverSound.play();
+      } else if (status === "Yawning") {
+        restSound.play();
+      }
+
+    } catch (err) {
+      console.error("Detection error:", err);
+    }
+  }
+
+  setInterval(sendFrame, 2000); // every 2 sec
+</script>
+
 </body>
 
 </html>
